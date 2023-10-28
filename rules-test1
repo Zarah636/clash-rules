@@ -1,0 +1,62 @@
+[custom]
+;不要随意改变关键字，否则会导致出错
+;acl4SSR规则，blackmatrix7规则
+
+;自动测速：支持
+;微软分流：支持
+;苹果分流：支持
+;增强中国IP段：支持
+;增强国外GFW：支持
+
+;设置规则标志位
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list
+ruleset=谷歌FCM,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list
+ruleset=Microsoft,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
+ruleset=Apple,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
+ruleset=Telegram,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
+ruleset=OpenAi,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list
+ruleset=YouTube,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
+ruleset=Netflix,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list
+ruleset=PikPak,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PikPak/PikPak.list
+ruleset=Emby,https://raw.githubusercontent.com/Zarah636/clash-rules/main/Emby.list?token=GHSAT0AAAAAACISWTLXF6CAGV5A755J4FAEZJ5NR3A
+ruleset=国内媒体,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list
+ruleset=国外媒体,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+ruleset=Nexitally,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaIp.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list
+ruleset=直连,GEOIP,LAN
+ruleset=直连,GEOIP,CN
+ruleset=FINAL,FINAL
+;设置规则标志位
+
+;设置分组标志位
+custom_proxy_group=Nexitally`select`.*
+custom_proxy_group=Microsoft`Nexitally`🇭🇰 香港`🇹🇼 台湾`🇸🇬 新加坡`🇺🇸 美国`🇯🇵 日本`🇰🇷 韩国`DIRECT
+custom_proxy_group=Apple`Nexitally`🇭🇰 香港`🇹🇼 台湾`🇸🇬 新加坡`🇺🇸 美国`🇯🇵 日本`🇰🇷 韩国`DIRECT
+custom_proxy_group=Telegram`Nexitally`🇭🇰 香港`🇹🇼 台湾`🇸🇬 新加坡`🇺🇸 美国`🇯🇵 日本`🇰🇷 韩国`DIRECT
+custom_proxy_group=OpenAi`Nexitally`🇭🇰 香港`🇹🇼 台湾`🇸🇬 新加坡`🇺🇸 美国`🇯🇵 日本`🇰🇷 韩国`DIRECT
+custom_proxy_group=YouTube`Nexitally`🇭🇰 香港`🇹🇼 台湾`🇸🇬 新加坡`🇺🇸 美国`🇯🇵 日本`🇰🇷 韩国`DIRECT
+custom_proxy_group=Netflix`Nexitally`🇭🇰 香港`🇹🇼 台湾`🇸🇬 新加坡`🇺🇸 美国`🇯🇵 日本`🇰🇷 韩国`DIRECT
+custom_proxy_group=Emby`Nexitally`🇭🇰 香港`🇹🇼 台湾`🇸🇬 新加坡`🇺🇸 美国`🇯🇵 日本`🇰🇷 韩国`DIRECT
+custom_proxy_group=PikPak`Nexitally`🇭🇰 香港`🇹🇼 台湾`🇸🇬 新加坡`🇺🇸 美国`🇯🇵 日本`🇰🇷 韩国`DIRECT
+custom_proxy_group=国内媒体`DIRECT
+custom_proxy_group=国外媒体`Nexitally`🇭🇰 香港`🇹🇼 台湾`🇸🇬 新加坡`🇺🇸 美国`🇯🇵 日本`🇰🇷 韩国`DIRECT
+custom_proxy_group=谷歌FCM`Nexitally`🇭🇰 香港`🇹🇼 台湾`🇸🇬 新加坡`🇺🇸 美国`🇯🇵 日本`🇰🇷 韩国`DIRECT
+custom_proxy_group=🇭🇰 香港`url-test`(港|HK|hk|Hong\s?Kong|HongKong|hongkong)(?!\s05)
+`http://1.1.1.1/generate_204`300,,50
+custom_proxy_group=🇹🇼 台湾`url-test`(台|新北|彰化|TW|Taiwan)`http://1.1.1.1/generate_204`300,,50
+custom_proxy_group=🇸🇬 新加坡`url-test`(新加坡|坡|SG|Singapore)`http://1.1.1.1/generate_204`300,,50
+custom_proxy_group=🇯🇵 日本`url-test`(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan)`http://1.1.1.1/generate_204`300,,50
+custom_proxy_group=🇺🇸 美国`url-test`(USA|United States)`http://1.1.1.1/generate_204`300,,150
+custom_proxy_group=🇰🇷 韩国`url-test`(KR|Korea|KOR|首尔|韩|韓)`http://1.1.1.1/generate_204`300,,50
+custom_proxy_group=直连`DIRECT
+custom_proxy_group=FINAL`Nexitally
+;设置分组标志位
+
+enable_rule_generator=true
+overwrite_original_rules=true
