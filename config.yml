@@ -13,7 +13,6 @@ dns:
   listen: 0.0.0.0:1053
   use-hosts: true
   default-nameserver:
-    - 119.29.29.29
     - https://hk.pro.xns.one/PSzRUiRrv0o/dns-query
   nameserver:
     - 223.5.5.5
