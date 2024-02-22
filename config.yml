@@ -18,7 +18,7 @@ dns:
   default-nameserver:    
     - 223.5.5.5
     - 119.29.29.29
-  nameserver: ['https://hk.pro.xns.one/PSzRUiRrv0o/resolve', 'https://hk1.pro.xns.one/PSzRUiRrv0o/resolve']
+  nameserver: ['https://8.217.246.48:5443/utaiDsLMOEg/dns-query', 'https://45.249.245.247:5443/utaiDsLMOEg/dns-query']
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - '*.lan'
