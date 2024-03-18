@@ -1,40 +1,40 @@
 # NAME: PikPak
-- DOMAIN-SUFFIX,dlandroid.rcv.sandai.net
-- DOMAIN-SUFFIX,dl-a10b-0858.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0859.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0860.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0861.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0862.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0863.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0864.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0865.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0866.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0867.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0868.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0869.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0870.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0871.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0872.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0873.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0874.mypikpak.com
-- DOMAIN-SUFFIX,l-a10b-0875.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0876.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0877.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0878.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0879.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0880.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0881.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0882.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0883.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0884.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0885.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0886.mypikpak.com
-- DOMAIN-SUFFIX,dl-a10b-0887.mypikpak.com
+  - DOMAIN-SUFFIX,dlandroid.rcv.sandai.net
+  - DOMAIN-SUFFIX,dl-a10b-0858.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0859.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0860.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0861.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0862.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0863.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0864.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0865.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0866.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0867.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0868.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0869.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0870.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0871.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0872.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0873.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0874.mypikpak.com
+  - DOMAIN-SUFFIX,l-a10b-0875.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0876.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0877.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0878.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0879.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0880.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0881.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0882.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0883.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0884.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0885.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0886.mypikpak.com
+  - DOMAIN-SUFFIX,dl-a10b-0887.mypikpak.com
 #pikpak域名结束 
 #pikpak的PCDN域名开始 
-- DOMAIN-SUFFIX,idx.shub.mypikpak.com
-- DOMAIN-SUFFIX,hub5pr.mypikpak.com
-- DOMAIN-SUFFIX,hub.dcdn.mypikpak.com
-- DOMAIN-SUFFIX,rp.shub.mypikpak.com
-- DOMAIN-SUFFIX,hub5emu.mypikpak.com
-- DOMAIN-KEYWORD,mypikpak
+  - DOMAIN-SUFFIX,idx.shub.mypikpak.com
+  - DOMAIN-SUFFIX,hub5pr.mypikpak.com
+  - DOMAIN-SUFFIX,hub.dcdn.mypikpak.com
+  - DOMAIN-SUFFIX,rp.shub.mypikpak.com
+  - DOMAIN-SUFFIX,hub5emu.mypikpak.com
+  - DOMAIN-KEYWORD,mypikpak
