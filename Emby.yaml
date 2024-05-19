@@ -1,6 +1,5 @@
 # NAME: Emby
 payload:
-  - DOMAIN,steammobile.akamaized.net
   - DOMAIN-SUFFIX,ii00.cc
   - DOMAIN,emby-us-v4.mius.uk
   - DOMAIN,emby-fr-v6.mius.uk
