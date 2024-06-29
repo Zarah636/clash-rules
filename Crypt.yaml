@@ -16,4 +16,4 @@ payload:
   - DOMAIN-SUFFIX,okx.com
   - DOMAIN-SUFFIX,huobi.com
   - DOMAIN-SUFFIX,htx.com
-  - DOMAIN-SUFFIX,bybit
+  - DOMAIN-KEYWORD,bybit
