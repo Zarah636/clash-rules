@@ -1,10 +1,8 @@
 # NAME: Emby
 payload:
   - DOMAIN-SUFFIX,ii00.cc
-  - DOMAIN,emby-us-v4.mius.uk
-  - DOMAIN,emby-fr-v6.mius.uk
-  - DOMAIN,jp01.mjjemby.org
-  - DOMAIN,cf.mjjemby.org
+  - DOMAIN,emby-micax-ca-v2.mius.uk
+  - DOMAIN,emby-mica-us-v1.mius.uk
   - DOMAIN,iuii-music.cn
   - DOMAIN,123456.buzz
   - DOMAIN,di.baisi.pro
