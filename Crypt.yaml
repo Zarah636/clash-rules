@@ -6,6 +6,8 @@ payload:
   - DOMAIN-SUFFIX,binancecnt.com
   - DOMAIN-SUFFIX,binancefuture.com
   - DOMAIN-SUFFIX,bnappzh.co
+  - DOMAIN,static.devfdg.net
+  - DOMAIN,static-file-1306379396.file.myqcloud.com
   - DOMAIN-SUFFIX,bnbstatic.com
   - DOMAIN-SUFFIX,bnbzh.ac
   - DOMAIN-SUFFIX,binance.info
