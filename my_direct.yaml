@@ -1,1 +1,17 @@
-
+payload:
+  - DOMAIN,wechatoa.ctm.net
+  - DOMAIN,sptv.ii00.cc
+  - DOMAIN,sgtv.ii00.cc
+  - DOMAIN,cn-music.mefun.vip
+  - IP-CIDR,154.17.230.7/32,DIRECT,no-resolve
+  - IP-CIDR,210.51.27.46/32,DIRECT,no-resolve
+  - IP-CIDR,98.126.27.164/32,DIRECT,no-resolve
+  - DOMAIN,hk.pro.xns.one
+  - DOMAIN,hk1.pro.xns.one
+  - DOMAIN,kr.pro.xns.one
+  - DOMAIN-SUFFIX,hgz.0000010.xyz
+  - DOMAIN-SUFFIX,osh-mcdn.0000010.xyz
+  - DOMAIN-SUFFIX,666.66a.net
+  - DOMAIN-SUFFIX,1110111.top
+  - DOMAIN-SUFFIX,123456.buzz
+  - DOMAIN-SUFFIX,dpxemby.xyz
