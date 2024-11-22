@@ -21,6 +21,7 @@ payload:
   - DOMAIN-SUFFIX,htx.com
   - DOMAIN-KEYWORD,bybit
   - DOMAIN-SUFFIX,byabcde.com
+  - DOMAIN-SUFFIX,bycsi.com
   - DOMAIN-SUFFIX,bybdc6.com
   - DOMAIN-SUFFIX,byd3c3.com
   - PROCESS-NAME,com.okinc.okex.gp
