@@ -11,6 +11,8 @@ payload:
   - DOMAIN,kr.pro.xns.one
   - DOMAIN-SUFFIX,hgz.0000010.xyz
   - DOMAIN-SUFFIX,osh-mcdn.0000010.xyz
+  - DOMAIN-SUFFIX,hgz-mcdn.0000010.xyz
+  - DOMAIN-SUFFIX,obj-mcdn.0000010.xyz
   - DOMAIN-SUFFIX,666.66a.net
   - DOMAIN-SUFFIX,1110111.top
   - DOMAIN-SUFFIX,123456.buzz
