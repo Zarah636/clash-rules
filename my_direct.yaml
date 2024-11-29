@@ -12,7 +12,7 @@ payload:
   - DOMAIN-SUFFIX,hgz.0000010.xyz
   - DOMAIN-SUFFIX,osh-mcdn.0000010.xyz
   - DOMAIN-SUFFIX,hgz-mcdn.0000010.xyz
-  - DOMAIN-SUFFIX,obj-mcdn.0000010.xyz
+  - DOMAIN-SUFFIX,hgz-qcdn.0000010.xyz
   - DOMAIN-SUFFIX,666.66a.net
   - DOMAIN,cdn.123456.buzz
   - DOMAIN-SUFFIX,dpxemby.xyz
