@@ -17,3 +17,4 @@ payload:
   - DOMAIN,cdn.123456.buzz
   - DOMAIN-SUFFIX,dpxemby.xyz
   - DOMAIN,yxvm.com
+  - IP-CIDR,154.17.232.92/32,DIRECT,no-resolve
