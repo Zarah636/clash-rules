@@ -8,6 +8,7 @@ payload:
   - IP-CIDR,98.126.27.164/32,DIRECT,no-resolve
   - IP-CIDR,157.254.32.145/32,DIRECT,no-resolve
   - IP-CIDR,172.99.138.98/24,DIRECT,no-resolve
+  - IP-CIDR,46.3.44.166/32,DIRECT,no-resolve
   - DOMAIN,hk.pro.xns.one
   - DOMAIN,hk1.pro.xns.one
   - DOMAIN,kr.pro.xns.one
