@@ -7,5 +7,4 @@ payload:
   - DOMAIN,123456.buzz
   - DOMAIN,110010.best
   - DOMAIN,fwd.hyperfomance.cloud
-  - DOMAIN-SUFFIX,visitxiangtan.com
-  - DOMAIN-SUFFIX,smartproxy.com
+  - DOMAIN,gate.decodo.com
