@@ -22,7 +22,6 @@ payload:
   - DOMAIN,yxvm.com
   - IP-CIDR,154.17.232.92/32,DIRECT,no-resolve
   - DOMAIN-SUFFIX,once.im
-  - DOMAIN,tz.100086.best
   - DOMAIN,c-z0-api-01.hash070.com
   - DOMAIN,t4c4rtq6.110010.best
   - DOMAIN,starsho.nebula-media.org
