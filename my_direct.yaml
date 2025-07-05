@@ -26,3 +26,5 @@ payload:
   - DOMAIN,t4c4rtq6.110010.best
   - DOMAIN,starsho.nebula-media.org
   - DOMAIN,www.59express.com
+  - IP-CIDR,8.217.246.48/32,DIRECT,no-resolve
+  - IP-CIDR,45.249.245.247/32,DIRECT,no-resolve
