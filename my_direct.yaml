@@ -9,9 +9,6 @@ payload:
   - IP-CIDR,157.254.32.145/32,DIRECT,no-resolve
   - IP-CIDR,172.99.138.98/24,DIRECT,no-resolve
   - IP-CIDR,46.3.44.166/32,DIRECT,no-resolve
-  - DOMAIN,hk.pro.xns.one
-  - DOMAIN,hk1.pro.xns.one
-  - DOMAIN,kr.pro.xns.one
   - DOMAIN-SUFFIX,hgz.0000010.xyz
   - DOMAIN-SUFFIX,osh-mcdn.0000010.xyz
   - DOMAIN-SUFFIX,hgz-mcdn.0000010.xyz
@@ -26,5 +23,3 @@ payload:
   - DOMAIN,t4c4rtq6.110010.best
   - DOMAIN,starsho.nebula-media.org
   - DOMAIN,www.59express.com
-  - IP-CIDR,8.217.246.48/32,DIRECT,no-resolve
-  - IP-CIDR,45.249.245.247/32,DIRECT,no-resolve
