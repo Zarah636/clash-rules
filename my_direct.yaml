@@ -3,12 +3,12 @@ payload:
   - DOMAIN,sptv.ii00.cc
   - DOMAIN,sgtv.ii00.cc
   - DOMAIN,cn-music.mefun.vip
-  - IP-CIDR,154.17.230.7/32,DIRECT,no-resolve
-  - IP-CIDR,210.51.27.46/32,DIRECT,no-resolve
-  - IP-CIDR,98.126.27.164/32,DIRECT,no-resolve
-  - IP-CIDR,157.254.32.94/32,DIRECT,no-resolve
-  - IP-CIDR,172.99.138.98/24,DIRECT,no-resolve
-  - IP-CIDR,46.3.44.166/32,DIRECT,no-resolve
+  - IP-CIDR,154.17.230.7/32,no-resolve
+  - IP-CIDR,210.51.27.46/32,no-resolve
+  - IP-CIDR,98.126.27.164/32,no-resolve
+  - IP-CIDR,157.254.32.94/32,no-resolve
+  - IP-CIDR,172.99.138.98/24,no-resolve
+  - IP-CIDR,46.3.44.166/32,no-resolve
   - DOMAIN-SUFFIX,hgz.0000010.xyz
   - DOMAIN-SUFFIX,osh-mcdn.0000010.xyz
   - DOMAIN-SUFFIX,hgz-mcdn.0000010.xyz
@@ -17,10 +17,11 @@ payload:
   - DOMAIN,cdn.123456.buzz
   - DOMAIN-SUFFIX,dpxemby.xyz
   - DOMAIN,yxvm.com
-  - IP-CIDR,154.17.232.92/32,DIRECT,no-resolve
+  - IP-CIDR,154.17.232.92/32,no-resolve
   - DOMAIN-SUFFIX,once.im
   - DOMAIN,c-z0-api-01.hash070.com
   - DOMAIN,t4c4rtq6.110010.best
   - DOMAIN,starsho.nebula-media.org
   - DOMAIN,www.59express.com
   - DOMAIN,cdn.synergypeak.org #奶昔订阅
+  - IP-CIDR,45.150.242.0/24,no-resolve
