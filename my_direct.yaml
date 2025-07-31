@@ -25,3 +25,4 @@ payload:
   - DOMAIN,www.59express.com
   - DOMAIN,cdn.synergypeak.org #奶昔订阅
   - IP-CIDR,45.150.242.0/24,no-resolve
+  - IP-CIDR,205.198.90.0/23,no-resolve
