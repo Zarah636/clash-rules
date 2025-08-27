@@ -3,7 +3,6 @@ payload:
   - DOMAIN,asia.gikken.co
   - DOMAIN-SUFFIX,matetranslate.com 
   - DOMAIN-SUFFIX,rfchost.com
-  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com  #谷歌play
   - DOMAIN,123456.buzz
   - DOMAIN,110010.best
   - DOMAIN,fwd.hyperfomance.cloud
