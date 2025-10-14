@@ -1,0 +1,7 @@
+payload:
+  - PROCESS-NAME,com.openai.chatgpt
+  - PROCESS-NAME,com.google.android.apps.bard
+  - PROCESS-NAME,ai.x.grok
+  - PROCESS-NAME,ai.perplexity.app.android
+  - PROCESS-NAME,com.microsoft.copilot
+  - PROCESS-NAME,com.anthropic.claude
