@@ -2,11 +2,13 @@ name: Update OpenAI Voice Ruleset
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    # Avoid GitHub Actions' high-load period at the top of the hour.
+    - cron: "17 0 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: update-openai-voice
@@ -26,34 +28,62 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Convert OpenAI voice JSON
+      - name: Convert and validate OpenAI voice JSON
         run: python scripts/convert_openai_voice.py
 
-      - name: Check for ruleset changes
+      - name: Summarize validation
+        if: always()
+        shell: bash
+        run: |
+          echo "## OpenAI Voice updater" >> "$GITHUB_STEP_SUMMARY"
+          if [[ -f OpenAI-Voice.status.json ]]; then
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat OpenAI-Voice.status.json >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No validated status was produced." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Check for repository changes
         id: changes
         shell: bash
         run: |
-          if git diff --quiet -- OpenAI-Voice.list; then
+          if [[ -z "$(git status --porcelain -- OpenAI-Voice.list OpenAI-Voice.status.json)" ]]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "OpenAI-Voice.list is already up to date."
           else
-            read -r added deleted _ < <(git diff --numstat -- OpenAI-Voice.list)
             echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "added=$added" >> "$GITHUB_OUTPUT"
-            echo "deleted=$deleted" >> "$GITHUB_OUTPUT"
-            echo "OpenAI-Voice.list changed: +$added, -$deleted."
+            git diff --stat -- OpenAI-Voice.list OpenAI-Voice.status.json
           fi
 
-      - name: Commit updated ruleset
+      - name: Commit validated update or heartbeat
         if: steps.changes.outputs.changed == 'true'
         shell: bash
-        env:
-          ADDED: ${{ steps.changes.outputs.added }}
-          DELETED: ${{ steps.changes.outputs.deleted }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add OpenAI-Voice.list
-          git commit -m "Update OpenAI Voice ruleset (+$ADDED, -$DELETED)"
+          git add OpenAI-Voice.list OpenAI-Voice.status.json
+          git commit -m "Update OpenAI Voice ruleset status"
           git pull --rebase
           git push
+
+      - name: Update failure notification
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WORKFLOW_STATUS: ${{ job.status }}
+        run: |
+          title="OpenAI Voice updater failure"
+          issue_number="$(gh issue list --state open --json number,title --jq ".[] | select(.title == \"$title\") | .number" | head -n 1)"
+          if [[ "$WORKFLOW_STATUS" == "success" ]]; then
+            if [[ -n "$issue_number" ]]; then
+              gh issue close "$issue_number" --comment "The scheduled updater has recovered successfully."
+            fi
+          elif [[ -z "$issue_number" ]]; then
+            gh issue create \
+              --title "$title" \
+              --body "The scheduled updater failed. Review run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          else
+            gh issue comment "$issue_number" \
+              --body "The updater failed again. Review run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          fi
