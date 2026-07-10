@@ -2,11 +2,15 @@
 import ipaddress
 import json
 import sys
+import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
 SOURCE_URL = "https://openai.com/chatgpt-voice.json"
 OUTPUT_FILE = Path("OpenAI-Voice.list")
+FETCH_ATTEMPTS = 3
+MIN_RULES = 10
 
 
 def fetch_json(url: str) -> dict:
@@ -17,8 +21,23 @@ def fetch_json(url: str) -> dict:
             "Accept": "application/json",
         },
     )
-    with urllib.request.urlopen(request, timeout=30) as response:
-        return json.load(response)
+
+    for attempt in range(1, FETCH_ATTEMPTS + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                return json.load(response)
+        except (OSError, json.JSONDecodeError) as error:
+            if attempt == FETCH_ATTEMPTS:
+                raise
+            delay = attempt * 10
+            print(
+                f"Fetch attempt {attempt}/{FETCH_ATTEMPTS} failed: {error}. "
+                f"Retrying in {delay} seconds.",
+                file=sys.stderr,
+            )
+            time.sleep(delay)
+
+    raise RuntimeError("OpenAI voice JSON fetch exhausted without a result.")
 
 
 def to_rule(prefix: str) -> str:
@@ -29,7 +48,12 @@ def to_rule(prefix: str) -> str:
 
 
 def main() -> int:
-    data = fetch_json(SOURCE_URL)
+    try:
+        data = fetch_json(SOURCE_URL)
+    except (OSError, json.JSONDecodeError) as error:
+        print(f"Failed to fetch OpenAI voice JSON: {error}", file=sys.stderr)
+        return 1
+
     prefixes = data.get("prefixes", [])
 
     rules = set()
@@ -42,8 +66,12 @@ def main() -> int:
         if ipv6_prefix:
             rules.add(to_rule(ipv6_prefix))
 
-    if not rules:
-        print("No IP prefixes found in OpenAI voice JSON.", file=sys.stderr)
+    if len(rules) < MIN_RULES:
+        print(
+            f"Refusing to write suspiciously small ruleset: "
+            f"{len(rules)} rules (minimum {MIN_RULES}).",
+            file=sys.stderr,
+        )
         return 1
 
     header = [
@@ -53,7 +81,10 @@ def main() -> int:
         "# Use with: RULE-SET,...,PROXY,no-resolve",
     ]
 
-    OUTPUT_FILE.write_text("\n".join(header + sorted(rules)) + "\n", encoding="utf-8")
+    OUTPUT_FILE.write_text(
+        "\n".join(header + sorted(rules)) + "\n",
+        encoding="utf-8",
+    )
     print(f"Wrote {len(rules)} rules to {OUTPUT_FILE}")
     return 0
 
