@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: update-openai-voice
@@ -64,3 +65,25 @@ jobs:
           git commit -m "Update OpenAI Voice ruleset status"
           git pull --rebase
           git push
+
+      - name: Update failure notification
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WORKFLOW_STATUS: ${{ job.status }}
+        run: |
+          title="OpenAI Voice updater failure"
+          issue_number="$(gh issue list --state open --json number,title --jq ".[] | select(.title == \"$title\") | .number" | head -n 1)"
+          if [[ "$WORKFLOW_STATUS" == "success" ]]; then
+            if [[ -n "$issue_number" ]]; then
+              gh issue close "$issue_number" --comment "The scheduled updater has recovered successfully."
+            fi
+          elif [[ -z "$issue_number" ]]; then
+            gh issue create \
+              --title "$title" \
+              --body "The scheduled updater failed. Review run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          else
+            gh issue comment "$issue_number" \
+              --body "The updater failed again. Review run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          fi
