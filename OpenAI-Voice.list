@@ -1,5 +1,6 @@
 # OpenAI ChatGPT Voice IP ruleset
 # Source: https://openai.com/chatgpt-voice.json
+# Source creation time: 2026-03-26T20:12:45.451356Z
 # Format: Surge RULE-SET / mihomo classical text
 # Use with: RULE-SET,...,PROXY,no-resolve
 IP-CIDR,102.37.57.54/32
