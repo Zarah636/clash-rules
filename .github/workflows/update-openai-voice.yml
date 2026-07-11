@@ -29,19 +29,52 @@ jobs:
           python-version: "3.13"
 
       - name: Convert and validate OpenAI voice JSON
+        id: validation
         run: python scripts/convert_openai_voice.py
 
       - name: Summarize validation
         if: always()
         shell: bash
+        env:
+          VALIDATION_OUTCOME: ${{ steps.validation.outcome }}
         run: |
-          echo "## OpenAI Voice updater" >> "$GITHUB_STEP_SUMMARY"
-          if [[ -f OpenAI-Voice.status.json ]]; then
-            echo '```json' >> "$GITHUB_STEP_SUMMARY"
-            cat OpenAI-Voice.status.json >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "# OpenAI Voice Ruleset" >> "$GITHUB_STEP_SUMMARY"
+          if [[ "$VALIDATION_OUTCOME" == "success" ]]; then
+            echo "## ✅ Update check succeeded" >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "No validated status was produced." >> "$GITHUB_STEP_SUMMARY"
+            echo "## ❌ Update check failed" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [[ -f OpenAI-Voice.status.json ]]; then
+            python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+
+          status = json.loads(Path("OpenAI-Voice.status.json").read_text(encoding="utf-8"))
+          stale = status.get("stale", False)
+          print()
+          print("| Check | Result |")
+          print("|---|---|")
+          print(f"| Rules validated | **{status.get('ruleCount', 'unknown')}** |")
+          print(f"| Last checked (UTC) | `{status.get('lastCheckedAt', 'unknown')}` |")
+          print(f"| Upstream generated (UTC) | `{status.get('sourceCreationTime', 'unknown')}` |")
+          print(f"| Upstream age | **{status.get('sourceAgeDays', 'unknown')} days** |")
+          print(f"| Freshness | {'⚠️ Stale' if stale else '✅ Fresh'} |")
+          if stale:
+              print()
+              print("> [!WARNING]")
+              print("> The updater succeeded, but OpenAI has not refreshed the upstream dataset recently.")
+              print("> The published rules still match the latest data available from OpenAI.")
+          print()
+          print("<details><summary>Raw status JSON</summary>")
+          print()
+          print("```json")
+          print(json.dumps(status, indent=2, sort_keys=True))
+          print("```")
+          print("</details>")
+          PY
+          else
+            echo "> [!CAUTION]" >> "$GITHUB_STEP_SUMMARY"
+            echo "> No validated status was produced. Open the job logs for the failure details." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Check for repository changes
