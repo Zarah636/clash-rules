@@ -2,6 +2,7 @@ payload:
   - DOMAIN,wechatoa.ctm.net
   - DOMAIN,sptv.ii00.cc
   - DOMAIN,smart.uhdnow.com
+  - DOMAIN,china-vod3.uhdnow.online
   - DOMAIN,mlc.once.im
   - DOMAIN,music01.mefun.vip
   - IP-CIDR,154.17.230.7/32,no-resolve
@@ -18,10 +19,7 @@ payload:
   - IP-CIDR,154.17.232.92/32,no-resolve
   #- DOMAIN-SUFFIX,once.im
   - DOMAIN,c-z0-api-01.hash070.com
-  - DOMAIN,t4c4rtq6.110010.best
-  - DOMAIN,starsho.nebula-media.org
   - DOMAIN,cdn.synergypeak.org #奶昔订阅
   - IP-CIDR,45.150.242.0/24,no-resolve
   - IP-CIDR,205.198.90.0/23,no-resolve
-  - DOMAIN,89ofaars.110010.best
   - DOMAIN,b1.zdz.plus
