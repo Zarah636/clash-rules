@@ -20,3 +20,12 @@ payload:
   - DOMAIN,web.topupm.com
   - DOMAIN,v1.uhdnow.com
   - DOMAIN,global.uhdnow.com
+  - DOMAIN,translate.googleapis.com
+  - DOMAIN,clients5.google.com
+  - DOMAIN,translate.google.com
+  - DOMAIN,api.matetranslate.com
+  - DOMAIN,api2.matetranslate.com
+  - DOMAIN,asia.gikken.co
+  - DOMAIN,gikken.co
+  - DOMAIN,sync.matetranslate.com
+  - DOMAIN,translations.matetranslate.com
