@@ -29,3 +29,4 @@ payload:
   - DOMAIN,gikken.co
   - DOMAIN,sync.matetranslate.com
   - DOMAIN,translations.matetranslate.com
+  - DOMAIN,cable.ua5v.com     #小米passkey认证域名
