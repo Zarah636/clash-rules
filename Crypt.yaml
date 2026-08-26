@@ -28,3 +28,4 @@ payload:
   - PROCESS-NAME,pro.huobi
   - PROCESS-NAME,com.binance.dev
   - PROCESS-NAME,io.safepal.wallet
+  - PROCESS-NAME,com.bybit.app
