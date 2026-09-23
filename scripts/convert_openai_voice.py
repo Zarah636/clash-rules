@@ -15,8 +15,6 @@ STATUS_FILE = Path("OpenAI-Voice.status.json")
 FETCH_ATTEMPTS = 3
 MIN_RULES = 10
 MAX_RULES = 1000
-WARN_SOURCE_AGE_DAYS = int(os.getenv("WARN_SOURCE_AGE_DAYS", "30"))
-MAX_SOURCE_AGE_DAYS = int(os.getenv("MAX_SOURCE_AGE_DAYS", "180"))
 STATUS_HEARTBEAT_DAYS = int(os.getenv("STATUS_HEARTBEAT_DAYS", "30"))
 MAX_REMOVAL_RATIO = float(os.getenv("MAX_REMOVAL_RATIO", "0.50"))
 
@@ -103,16 +101,8 @@ def read_status() -> dict:
         return {}
 
 
-def should_refresh_status(
-    old_status: dict,
-    creation_time: str,
-    rules_changed: bool,
-    age_limit_exceeded: bool,
-    now: datetime,
-) -> bool:
+def should_refresh_status(old_status: dict, creation_time: str, rules_changed: bool, now: datetime) -> bool:
     if rules_changed or old_status.get("sourceCreationTime") != creation_time:
-        return True
-    if old_status.get("ageLimitExceeded") != age_limit_exceeded:
         return True
     try:
         checked = parse_creation_time(old_status.get("lastCheckedAt"))
@@ -139,19 +129,6 @@ def main() -> int:
         return 1
 
     now = datetime.now(timezone.utc)
-    age_days = (now - creation).total_seconds() / 86400
-    if age_days < -1:
-        print("OpenAI voice update validation failed: creationTime is in the future", file=sys.stderr)
-        return 1
-    age_limit_exceeded = age_days > MAX_SOURCE_AGE_DAYS
-    if age_limit_exceeded:
-        print(
-            f"::warning title=Upstream age limit exceeded::OpenAI source is {age_days:.1f} days old; "
-            "continuing because the fetched dataset passed all content validation checks"
-        )
-    if age_days > WARN_SOURCE_AGE_DAYS:
-        print(f"::warning title=Stale upstream data::OpenAI source is {age_days:.1f} days old")
-
     creation_text = creation.isoformat().replace("+00:00", "Z")
     output = "\n".join([
         "# OpenAI ChatGPT Voice IP ruleset",
@@ -167,19 +144,16 @@ def main() -> int:
         atomic_write(OUTPUT_FILE, output)
 
     old_status = read_status()
-    if should_refresh_status(old_status, creation_text, rules_changed, age_limit_exceeded, now):
+    if should_refresh_status(old_status, creation_text, rules_changed, now):
         status = {
-            "ageLimitExceeded": age_limit_exceeded,
             "lastCheckedAt": now.isoformat().replace("+00:00", "Z"),
             "ruleCount": len(rules),
-            "sourceAgeDays": round(age_days, 1),
             "sourceCreationTime": creation_text,
             "sourceUrl": SOURCE_URL,
-            "stale": age_days > WARN_SOURCE_AGE_DAYS,
         }
         atomic_write(STATUS_FILE, json.dumps(status, indent=2, sort_keys=True) + "\n")
 
-    print(f"Validated {len(rules)} rules; source age {age_days:.1f} days; rules changed={rules_changed}")
+    print(f"Validated {len(rules)} rules; rules changed={rules_changed}")
     return 0
 
 
