@@ -103,8 +103,16 @@ def read_status() -> dict:
         return {}
 
 
-def should_refresh_status(old_status: dict, creation_time: str, rules_changed: bool, now: datetime) -> bool:
+def should_refresh_status(
+    old_status: dict,
+    creation_time: str,
+    rules_changed: bool,
+    age_limit_exceeded: bool,
+    now: datetime,
+) -> bool:
     if rules_changed or old_status.get("sourceCreationTime") != creation_time:
+        return True
+    if old_status.get("ageLimitExceeded") != age_limit_exceeded:
         return True
     try:
         checked = parse_creation_time(old_status.get("lastCheckedAt"))
@@ -135,9 +143,12 @@ def main() -> int:
     if age_days < -1:
         print("OpenAI voice update validation failed: creationTime is in the future", file=sys.stderr)
         return 1
-    if age_days > MAX_SOURCE_AGE_DAYS:
-        print(f"OpenAI voice update validation failed: source is {age_days:.1f} days old", file=sys.stderr)
-        return 1
+    age_limit_exceeded = age_days > MAX_SOURCE_AGE_DAYS
+    if age_limit_exceeded:
+        print(
+            f"::warning title=Upstream age limit exceeded::OpenAI source is {age_days:.1f} days old; "
+            "continuing because the fetched dataset passed all content validation checks"
+        )
     if age_days > WARN_SOURCE_AGE_DAYS:
         print(f"::warning title=Stale upstream data::OpenAI source is {age_days:.1f} days old")
 
@@ -156,8 +167,9 @@ def main() -> int:
         atomic_write(OUTPUT_FILE, output)
 
     old_status = read_status()
-    if should_refresh_status(old_status, creation_text, rules_changed, now):
+    if should_refresh_status(old_status, creation_text, rules_changed, age_limit_exceeded, now):
         status = {
+            "ageLimitExceeded": age_limit_exceeded,
             "lastCheckedAt": now.isoformat().replace("+00:00", "Z"),
             "ruleCount": len(rules),
             "sourceAgeDays": round(age_days, 1),

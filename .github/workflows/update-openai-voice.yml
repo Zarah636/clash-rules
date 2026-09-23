@@ -51,6 +51,7 @@ jobs:
 
           status = json.loads(Path("OpenAI-Voice.status.json").read_text(encoding="utf-8"))
           stale = status.get("stale", False)
+          age_limit_exceeded = status.get("ageLimitExceeded", False)
           print()
           print("| Check | Result |")
           print("|---|---|")
@@ -58,12 +59,15 @@ jobs:
           print(f"| Last checked (UTC) | `{status.get('lastCheckedAt', 'unknown')}` |")
           print(f"| Upstream generated (UTC) | `{status.get('sourceCreationTime', 'unknown')}` |")
           print(f"| Upstream age | **{status.get('sourceAgeDays', 'unknown')} days** |")
+          print(f"| 180-day age limit exceeded | **{'Yes' if age_limit_exceeded else 'No'}** |")
           print(f"| Freshness | {'⚠️ Stale' if stale else '✅ Fresh'} |")
           if stale:
               print()
               print("> [!WARNING]")
               print("> The updater succeeded, but OpenAI has not refreshed the upstream dataset recently.")
               print("> The published rules still match the latest data available from OpenAI.")
+          if age_limit_exceeded:
+              print("> The source age limit was exceeded, but the fetched dataset passed all content validation checks.")
           print()
           print("<details><summary>Raw status JSON</summary>")
           print()

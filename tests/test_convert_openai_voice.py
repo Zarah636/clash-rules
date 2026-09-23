@@ -1,4 +1,6 @@
+import io
 import importlib.util
+import json
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
@@ -26,7 +28,39 @@ class ConverterTests(unittest.TestCase):
     def test_monthly_status_heartbeat(self):
         now = datetime.now(timezone.utc)
         old = {"sourceCreationTime": "2026-01-01T00:00:00Z", "lastCheckedAt": (now - timedelta(days=31)).isoformat()}
-        self.assertTrue(converter.should_refresh_status(old, "2026-01-01T00:00:00Z", False, now))
+        self.assertTrue(converter.should_refresh_status(old, "2026-01-01T00:00:00Z", False, False, now))
+
+    def test_status_refreshes_when_age_limit_is_first_exceeded(self):
+        now = datetime.now(timezone.utc)
+        old = {
+            "sourceCreationTime": "2026-01-01T00:00:00Z",
+            "lastCheckedAt": now.isoformat(),
+            "ageLimitExceeded": False,
+        }
+        self.assertTrue(converter.should_refresh_status(old, "2026-01-01T00:00:00Z", False, True, now))
+
+    def test_old_but_valid_source_succeeds_with_warning(self):
+        creation = datetime.now(timezone.utc) - timedelta(days=181)
+        data = {
+            "creationTime": creation.isoformat(),
+            "prefixes": [{"ipv4Prefix": f"192.0.2.{i}/32"} for i in range(10)],
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "OpenAI-Voice.list"
+            status = Path(directory) / "OpenAI-Voice.status.json"
+            stdout = io.StringIO()
+            with (
+                patch.object(converter, "fetch_json", return_value=data),
+                patch.object(converter, "OUTPUT_FILE", output),
+                patch.object(converter, "STATUS_FILE", status),
+                patch("sys.stdout", stdout),
+            ):
+                self.assertEqual(converter.main(), 0)
+
+            saved_status = json.loads(status.read_text(encoding="utf-8"))
+            self.assertTrue(saved_status["ageLimitExceeded"])
+            self.assertTrue(saved_status["stale"])
+            self.assertIn("Upstream age limit exceeded", stdout.getvalue())
 
     def test_atomic_write(self):
         with tempfile.TemporaryDirectory() as directory:

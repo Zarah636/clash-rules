@@ -1,7 +1,8 @@
 {
-  "lastCheckedAt": "2026-09-09T04:41:37.266375Z",
+  "ageLimitExceeded": true,
+  "lastCheckedAt": "2026-09-23T14:43:28.182810Z",
   "ruleCount": 23,
-  "sourceAgeDays": 166.4,
+  "sourceAgeDays": 180.8,
   "sourceCreationTime": "2026-03-26T20:12:45.451356Z",
   "sourceUrl": "https://openai.com/chatgpt-voice.json",
   "stale": true
