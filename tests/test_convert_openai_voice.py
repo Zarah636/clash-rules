@@ -1,4 +1,6 @@
+import io
 import importlib.util
+import json
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
@@ -27,6 +29,30 @@ class ConverterTests(unittest.TestCase):
         now = datetime.now(timezone.utc)
         old = {"sourceCreationTime": "2026-01-01T00:00:00Z", "lastCheckedAt": (now - timedelta(days=31)).isoformat()}
         self.assertTrue(converter.should_refresh_status(old, "2026-01-01T00:00:00Z", False, now))
+
+    def test_source_age_does_not_affect_conversion(self):
+        creation = datetime.now(timezone.utc) - timedelta(days=3650)
+        data = {
+            "creationTime": creation.isoformat(),
+            "prefixes": [{"ipv4Prefix": f"192.0.2.{i}/32"} for i in range(10)],
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "OpenAI-Voice.list"
+            status = Path(directory) / "OpenAI-Voice.status.json"
+            stdout = io.StringIO()
+            with (
+                patch.object(converter, "fetch_json", return_value=data),
+                patch.object(converter, "OUTPUT_FILE", output),
+                patch.object(converter, "STATUS_FILE", status),
+                patch("sys.stdout", stdout),
+            ):
+                self.assertEqual(converter.main(), 0)
+
+            saved_status = json.loads(status.read_text(encoding="utf-8"))
+            self.assertNotIn("ageLimitExceeded", saved_status)
+            self.assertNotIn("sourceAgeDays", saved_status)
+            self.assertNotIn("stale", saved_status)
+            self.assertNotIn("warning", stdout.getvalue().lower())
 
     def test_atomic_write(self):
         with tempfile.TemporaryDirectory() as directory:

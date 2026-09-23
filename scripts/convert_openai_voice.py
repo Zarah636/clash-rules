@@ -15,8 +15,6 @@ STATUS_FILE = Path("OpenAI-Voice.status.json")
 FETCH_ATTEMPTS = 3
 MIN_RULES = 10
 MAX_RULES = 1000
-WARN_SOURCE_AGE_DAYS = int(os.getenv("WARN_SOURCE_AGE_DAYS", "30"))
-MAX_SOURCE_AGE_DAYS = int(os.getenv("MAX_SOURCE_AGE_DAYS", "180"))
 STATUS_HEARTBEAT_DAYS = int(os.getenv("STATUS_HEARTBEAT_DAYS", "30"))
 MAX_REMOVAL_RATIO = float(os.getenv("MAX_REMOVAL_RATIO", "0.50"))
 
@@ -131,16 +129,6 @@ def main() -> int:
         return 1
 
     now = datetime.now(timezone.utc)
-    age_days = (now - creation).total_seconds() / 86400
-    if age_days < -1:
-        print("OpenAI voice update validation failed: creationTime is in the future", file=sys.stderr)
-        return 1
-    if age_days > MAX_SOURCE_AGE_DAYS:
-        print(f"OpenAI voice update validation failed: source is {age_days:.1f} days old", file=sys.stderr)
-        return 1
-    if age_days > WARN_SOURCE_AGE_DAYS:
-        print(f"::warning title=Stale upstream data::OpenAI source is {age_days:.1f} days old")
-
     creation_text = creation.isoformat().replace("+00:00", "Z")
     output = "\n".join([
         "# OpenAI ChatGPT Voice IP ruleset",
@@ -160,14 +148,12 @@ def main() -> int:
         status = {
             "lastCheckedAt": now.isoformat().replace("+00:00", "Z"),
             "ruleCount": len(rules),
-            "sourceAgeDays": round(age_days, 1),
             "sourceCreationTime": creation_text,
             "sourceUrl": SOURCE_URL,
-            "stale": age_days > WARN_SOURCE_AGE_DAYS,
         }
         atomic_write(STATUS_FILE, json.dumps(status, indent=2, sort_keys=True) + "\n")
 
-    print(f"Validated {len(rules)} rules; source age {age_days:.1f} days; rules changed={rules_changed}")
+    print(f"Validated {len(rules)} rules; rules changed={rules_changed}")
     return 0
 
 
