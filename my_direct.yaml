@@ -23,3 +23,4 @@ payload:
   - IP-CIDR,45.150.242.0/24,no-resolve
   - IP-CIDR,205.198.90.0/23,no-resolve
   - DOMAIN,b1.zdz.plus
+  - DOMAIN,api-slb.kbsfdxc.net
